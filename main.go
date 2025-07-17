@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/andreylsant/Desenvolvendo_Api_Rest_golang/router"
@@ -11,7 +12,6 @@ func main() {
 	r := mux.NewRouter()
 	router.MyRouter()
 	if err := http.ListenAndServe(":8000", r); err != nil{
-		err.Error()
-		return
+		log.Fatal(err.Error)
 	}
 }

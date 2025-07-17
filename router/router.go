@@ -8,5 +8,6 @@ import (
 func MyRouter() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", controller.Home).Methods("Get")
-	r.HandleFunc("/personalidade", controller.ExibirPersonalidade).Methods("Get")
+	r.HandleFunc("/personalidades", controller.ExibirPersonalidade).Methods("Get")
+	r.HandleFunc("/personalidades/{id}", controller.ExibirPersonalidadePorID).Methods("Get")
 }
