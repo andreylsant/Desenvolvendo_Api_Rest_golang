@@ -16,7 +16,12 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 func ExibirPersonalidade(w http.ResponseWriter, r *http.Request) {
 	var personalidade []model.Personalidade
-	database.DB.Find(&personalidade)
+
+	 err := database.DB.Find(&personalidade)
+	 if err != nil{
+		http.Error(w, "Request invalid", 500)
+		return
+	 }
 	json.NewEncoder(w).Encode(personalidade)
 }
 

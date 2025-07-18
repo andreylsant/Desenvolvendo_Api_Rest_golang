@@ -6,15 +6,18 @@ import (
 
 	"github.com/andreylsant/Desenvolvendo_Api_Rest_golang/database"
 	"github.com/andreylsant/Desenvolvendo_Api_Rest_golang/model"
+	"github.com/gorilla/mux"
 )
 
-func CriarPersonalidade(w http.ResponseWriter, r *http.Request) {
+func DeletaPersonalidade(w http.ResponseWriter, r *http.Request) {
 	var personalidade []model.Personalidade
-	json.NewDecoder(r.Body).Decode(&personalidade)
-	
-	err := database.DB.Create(&personalidade)
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	err := database.DB.Delete(&personalidade, id)
 	if err != nil{
-		http.Error(w, err.Error.Error(), 500)
+		http.Error(w, "Request Invalid", 500)
+		return
 	}
 
 	json.NewEncoder(w).Encode(personalidade)
